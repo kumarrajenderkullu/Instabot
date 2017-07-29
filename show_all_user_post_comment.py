@@ -14,7 +14,7 @@ def show_all_comment(insta_username):
     print 'GET request url : %s\n' % (request_url)
     comment_info = requests.get(request_url).json()
 
-    if comment_info['meta']['code'] == 200:     #Check if there are negative and positive comments..
+    if comment_info['meta']['code'] != 200:     #Check if there are negative and positive comments..
 
         if len(comment_info['data']):
             for x in range(0, len(comment_info['data'])):

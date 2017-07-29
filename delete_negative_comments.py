@@ -7,7 +7,7 @@ from textblob.sentiments import NaiveBayesAnalyzer
 def delete_negative_comment(insta_username):
     # Function Logic to Delete Negative Comments..
     media_id = get_post_id(insta_username)
-    request_url = ( + 'media/%s/comments/?access_token=%s') % (media_id, access_token)
+    request_url = (base_url + 'media/%s/comments/?access_token=%s') % (media_id, access_token)
     print 'GET request url : %s\n' % (request_url)
     comment_info = requests.get(request_url).json()
 
@@ -18,8 +18,7 @@ def delete_negative_comment(insta_username):
         print 'GET request url : %s\n' % (request_url)
         comment_info = requests.get(request_url).json()
 
-        if comment_info['meta'][
-            'code'] == 200:  # Check if there are Negative Comments Using textblob.sentiments Library
+        if comment_info['meta']['code'] != 200:  # Check if there are Negative Comments Using textblob.sentiments Library
             if len(comment_info['data']):
                 for x in range(0, len(comment_info['data'])):
                     comment_id = comment_info['data'][x]['id']
